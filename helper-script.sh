@@ -7,11 +7,15 @@
 # Resolve the directory where this script lives.
 _HELPER_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
-# Keep existing PYTHONPATH entries, but prepend this repo root.
+
+# Add the project root and the directory containing scrape_and_vectorize_content.py to PYTHONPATH.
+SCRIPT_PATH="${_HELPER_DIR}/app/scripts/scrape_and_vectorize_content.py"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+
 if [[ -n "${PYTHONPATH:-}" ]]; then
-  export PYTHONPATH="${_HELPER_DIR}:${PYTHONPATH}"
+  export PYTHONPATH="${_HELPER_DIR}:$SCRIPT_DIR:${PYTHONPATH}"
 else
-  export PYTHONPATH="${_HELPER_DIR}"
+  export PYTHONPATH="${_HELPER_DIR}:$SCRIPT_DIR"
 fi
 
 unset _HELPER_DIR

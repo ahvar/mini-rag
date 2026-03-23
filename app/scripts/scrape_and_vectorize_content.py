@@ -8,9 +8,7 @@ This module separates indexing into explicit stages:
 4. Upsert chunks plus embeddings into Pinecone.
 
 The default URL list includes the Lilian Weng agents article as a good
-LangChain-style example source. In notebook environments, restart the kernel
-when switching target pages so old loader state is not accidentally mixed into
-a new indexing run.
+LangChain-style example source.
 """
 
 from __future__ import annotations

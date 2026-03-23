@@ -5,6 +5,7 @@ import importlib.util
 import sys
 import types
 from pathlib import Path
+from app.scripts.scrape_and_vectorize_content import TextChunker, Scraper, IndexingPipeline
 
 import pytest
 
@@ -138,12 +139,13 @@ def scrape_module(monkeypatch: pytest.MonkeyPatch):
     for name, module in stub_modules.items():
         monkeypatch.setitem(sys.modules, name, module)
 
-    spec = importlib.util.spec_from_file_location(MODULE_NAME, SCRIPT_PATH)
-    module = importlib.util.module_from_spec(spec)
-    assert spec is not None and spec.loader is not None
-    sys.modules.pop(MODULE_NAME, None)
-    sys.modules[MODULE_NAME] = module
-    spec.loader.exec_module(module)
+    # spec = importlib.util.spec_from_file_location(MODULE_NAME, SCRIPT_PATH)
+    # module = importlib.util.module_from_spec(spec)
+    module = Scraper()
+    #assert spec is not None and spec.loader is not None
+    #sys.modules.pop(MODULE_NAME, None)
+    #sys.modules[MODULE_NAME] = module
+    #spec.loader.exec_module(module)
     return module
 
 
